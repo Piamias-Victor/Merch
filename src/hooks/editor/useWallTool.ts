@@ -1,12 +1,22 @@
 import { useState, useCallback } from 'react';
-import { Point, Wall, EditorState } from '@/types/pharmacy';
-import { snapToGrid, generateId } from '@/lib/canvas/utils';
+import { Point, Wall } from '@/types/editor';
 
 interface UseWallToolProps {
   gridSize: number;
   snapEnabled: boolean;
   onWallCreate: (wall: Wall) => void;
 }
+
+const snapToGrid = (point: Point, gridSize: number): Point => {
+  return {
+    x: Math.round(point.x / gridSize) * gridSize,
+    y: Math.round(point.y / gridSize) * gridSize,
+  };
+};
+
+const generateId = (): string => {
+  return Math.random().toString(36).substr(2, 9);
+};
 
 export const useWallTool = ({ gridSize, snapEnabled, onWallCreate }: UseWallToolProps) => {
   const [isDrawing, setIsDrawing] = useState(false);
@@ -31,7 +41,7 @@ export const useWallTool = ({ gridSize, snapEnabled, onWallCreate }: UseWallTool
         id: generateId(),
         start: startPoint,
         end: finalPoint,
-        thickness: 10, // 10cm par défaut
+        thickness: 10,
       };
       
       onWallCreate(newWall);

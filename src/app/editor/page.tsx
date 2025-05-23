@@ -2,8 +2,18 @@
 
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
-import EditorLayout from '@/components/editor/EditorLayout';
-import { PlanMetadata } from '@/types/pharmacy';
+import dynamic from 'next/dynamic';
+import { PlanMetadata } from '@/types/editor';
+
+// Import dynamique du layout
+const EditorLayout = dynamic(() => import('@/components/editor/EditorLayout'), {
+  ssr: false,
+  loading: () => (
+    <div className="h-screen flex items-center justify-center">
+      <div className="text-lg text-gray-500">Chargement de l'éditeur...</div>
+    </div>
+  ),
+});
 
 function EditorContent() {
   const searchParams = useSearchParams();

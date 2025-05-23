@@ -9,12 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "canvas": "^3.0.0-rc3",
     "clsx": "^2.1.1",
     "framer-motion": "^12.12.1",
+    "konva": "^9.3.20",
     "lucide-react": "^0.511.0",
     "next": "15.3.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-konva": "^19.0.3",
     "tailwind-merge": "^3.3.0"
   },
   "devDependencies": {
